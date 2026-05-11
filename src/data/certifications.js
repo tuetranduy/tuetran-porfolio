@@ -1,41 +1,56 @@
 export const certifications = [
   {
     id: 1,
-    title: "ISTQB Certified Tester - Foundation Level",
+    title: "ISTQB® Certified Tester Foundation Level (CTFL)",
     issuer: "ISTQB",
-    date: "2020",
-    credentialId: "CTFL-2020-XXXXX",
+    date: "2023",
+    credentialId: "",
     logo: "/assets/images/istqb-logo.png",
     link: "#"
   },
   {
     id: 2,
-    title: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2022",
-    credentialId: "AWS-CP-XXXXX",
-    logo: "/assets/images/aws-logo.png",
+    title: "Requirement of Engineering Certificate",
+    issuer: "Carnegie Mellon University",
+    date: "2017",
+    credentialId: "",
+    logo: "/assets/images/cmu-logo.png",
     link: "#"
   },
   {
     id: 3,
-    title: "Microsoft Certified: Azure Fundamentals",
-    issuer: "Microsoft",
-    date: "2021",
-    credentialId: "AZ-900-XXXXX",
-    logo: "/assets/images/azure-logo.png",
+    title: "Software Project Management Certificate",
+    issuer: "Carnegie Mellon University",
+    date: "2017",
+    credentialId: "",
+    logo: "/assets/images/cmu-logo.png",
     link: "#"
   },
   {
     id: 4,
-    title: "Certified Kubernetes Administrator",
-    issuer: "CNCF",
-    date: "2023",
-    credentialId: "CKA-XXXXX",
-    logo: "/assets/images/kubernetes-logo.png",
+    title: "FPT Platinum Club Member",
+    issuer: "FPT Software",
+    date: "2018",
+    credentialId: "",
+    logo: "/assets/images/fpt-logo.png",
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "Best Performer of Business Unit",
+    issuer: "FPT Software",
+    date: "2017",
+    credentialId: "",
+    logo: "/assets/images/fpt-logo.png",
+    link: "#"
+  },
+  {
+    id: 6,
+    title: "Best Youth Union Leader",
+    issuer: "FPT Software",
+    date: "2018",
+    credentialId: "",
+    logo: "/assets/images/fpt-logo.png",
     link: "#"
   }
 ];
-
-// Note: Update these with your actual certifications
-// You can add more certifications or remove placeholders
