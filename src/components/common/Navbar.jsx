@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import useScrollDirection from '../../hooks/useScrollDirection';
+import MagneticButton from './MagneticButton';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -15,19 +17,23 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { scrollDirection, scrollY } = useScrollDirection();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    setIsScrolled(scrollY > 50);
+  }, [scrollY]);
+
+  // Hide navbar on scroll down, show on scroll up (only after scrolling past hero)
+  const isHidden = scrollDirection === 'down' && scrollY > 500;
 
   return (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      animate={{ 
+        y: isHidden ? -100 : 0,
+        opacity: isHidden ? 0 : 1,
+      }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'glass py-3' : 'bg-transparent py-5'
       }`}
@@ -35,34 +41,39 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.a
-            href="#home"
-            className="text-2xl font-bold gradient-text"
-            whileHover={{ scale: 1.05 }}
-          >
-            Tue Tran
-          </motion.a>
+          <MagneticButton strength={0.2}>
+            <motion.a
+              href="#home"
+              className="text-2xl font-bold gradient-text"
+              whileHover={{ scale: 1.05 }}
+            >
+              Tue Tran
+            </motion.a>
+          </MagneticButton>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className="text-slate-300 hover:text-cyan-400 transition-colors text-sm font-medium"
-                whileHover={{ y: -2 }}
-              >
-                {link.name}
-              </motion.a>
+              <MagneticButton key={link.name} strength={0.15}>
+                <motion.a
+                  href={link.href}
+                  className="text-slate-300 hover:text-cyan-400 transition-colors text-sm font-medium"
+                  whileHover={{ y: -2 }}
+                >
+                  {link.name}
+                </motion.a>
+              </MagneticButton>
             ))}
-            <motion.a
-              href="#contact"
-              className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold rounded-lg transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Hire Me
-            </motion.a>
+            <MagneticButton strength={0.3}>
+              <motion.a
+                href="#contact"
+                className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-semibold rounded-lg transition-colors ripple-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Hire Me
+              </motion.a>
+            </MagneticButton>
           </div>
 
           {/* Mobile Menu Button */}
