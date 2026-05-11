@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Phone, CheckCircle, AlertCircle } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
-import Button from '../common/Button';
 import { socialLinks, telegramConfig } from '../../data/socialLinks';
 
 const Contact = () => {
@@ -56,13 +55,11 @@ ${data.message}
     setStatus({ type: '', message: '' });
 
     try {
-      // Check if Telegram is configured (env variables are set)
       if (!telegramConfig.botToken || !telegramConfig.chatId) {
-        // Demo mode - just simulate success
         await new Promise(resolve => setTimeout(resolve, 1000));
         setStatus({
           type: 'success',
-          message: 'Message sent successfully! (Demo mode - configure Telegram env variables to receive messages)',
+          message: 'Message sent successfully! (Demo mode)',
         });
       } else {
         const success = await sendToTelegram(formData);
@@ -103,34 +100,28 @@ ${data.message}
       icon: MapPin,
       title: 'Location',
       value: 'Vietnam',
-      link: null,
     },
   ];
 
+  const inputClasses = "w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors";
+
   return (
-    <section id="contact" className="py-20 bg-slate-950 relative">
-      <div className="absolute inset-0 bg-grid opacity-30" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contact" className="py-24 bg-slate-950">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           subtitle="Get In Touch"
           title="Contact Me"
           description="Have a project in mind or want to discuss quality assurance? Let's connect!"
         />
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
+        <div className="grid lg:grid-cols-5 gap-12 mt-12">
+          {/* Contact Info - Left Side */}
+          <div className="lg:col-span-2 space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">
+              <h3 className="text-2xl font-bold text-white mb-3">
                 Let's work together
               </h3>
-              <p className="text-slate-400">
+              <p className="text-slate-400 leading-relaxed">
                 I'm always interested in hearing about new projects and opportunities. 
                 Whether you need help with test automation, performance testing, or 
                 building a quality-focused development process, I'd love to chat.
@@ -138,23 +129,22 @@ ${data.message}
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-8">
+            <div className="space-y-4">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 const content = (
-                  <div className="flex items-center gap-5 p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-cyan-500/50 transition-colors">
-                    <div className="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Icon className="text-cyan-400" size={26} />
+                  <div className="flex items-center gap-4 p-4 bg-slate-900/50 border border-slate-800 rounded-lg hover:border-slate-700 transition-colors">
+                    <div className="w-10 h-10 bg-cyan-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="text-cyan-400" size={20} />
                     </div>
                     <div>
-                      <p className="text-slate-500 text-sm mb-1">{info.title}</p>
-                      <p className="text-white font-medium text-lg">{info.value}</p>
+                      <p className="text-slate-500 text-sm">{info.title}</p>
+                      <p className="text-white font-medium">{info.value}</p>
                     </div>
                   </div>
                 );
-
                 return info.link ? (
-                  <a key={info.title} href={info.link}>
+                  <a key={info.title} href={info.link} className="block">
                     {content}
                   </a>
                 ) : (
@@ -165,38 +155,36 @@ ${data.message}
 
             {/* Social Links */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Connect with me</h4>
+              <h4 className="text-white font-medium mb-3">Connect with me</h4>
               <div className="flex gap-3">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
-                    <motion.a
+                    <a
                       key={social.name}
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all"
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-lg flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-colors"
+                      aria-label={social.name}
                     >
-                      <Icon size={24} />
-                    </motion.a>
+                      <Icon size={20} />
+                    </a>
                   );
                 })}
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
+          {/* Contact Form - Right Side */}
+          <div className="lg:col-span-3">
+            <form 
+              onSubmit={handleSubmit} 
+              className="space-y-5 p-6 sm:p-8 bg-slate-900/50 border border-slate-800 rounded-xl"
+            >
+              <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label htmlFor="name" className="block text-slate-300 text-sm font-medium mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
                     Name
                   </label>
                   <input
@@ -205,13 +193,13 @@ ${data.message}
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="Your name"
+                    required
+                    className={inputClasses}
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
                     Email
                   </label>
                   <input
@@ -220,15 +208,15 @@ ${data.message}
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="your@email.com"
+                    required
+                    className={inputClasses}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-slate-300 text-sm font-medium mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">
                   Subject
                 </label>
                 <input
@@ -237,14 +225,14 @@ ${data.message}
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                   placeholder="Project inquiry"
+                  required
+                  className={inputClasses}
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-slate-300 text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -252,10 +240,10 @@ ${data.message}
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  placeholder="Tell me about your project..."
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                  placeholder="Tell me about your project..."
+                  className={`${inputClasses} resize-none`}
                 />
               </div>
 
@@ -264,7 +252,7 @@ ${data.message}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex items-center gap-2 p-4 rounded-lg ${
+                  className={`flex items-center gap-3 p-4 rounded-lg ${
                     status.type === 'success'
                       ? 'bg-green-500/10 text-green-400 border border-green-500/30'
                       : 'bg-red-500/10 text-red-400 border border-red-500/30'
@@ -275,20 +263,33 @@ ${data.message}
                   ) : (
                     <AlertCircle size={20} />
                   )}
-                  {status.message}
+                  <span className="text-sm">{status.message}</span>
                 </motion.div>
               )}
 
-              <Button
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full"
-                icon={<Send size={20} />}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
+                {isSubmitting ? (
+                  <>
+                    <motion.div
+                      className="w-5 h-5 border-2 border-slate-900/30 border-t-slate-900 rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={18} />
+                  </>
+                )}
+              </button>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
