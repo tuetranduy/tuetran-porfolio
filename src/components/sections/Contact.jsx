@@ -56,14 +56,13 @@ ${data.message}
     setStatus({ type: '', message: '' });
 
     try {
-      // Check if Telegram is configured
-      if (telegramConfig.botToken === 'YOUR_BOT_TOKEN_HERE' || 
-          telegramConfig.chatId === 'YOUR_CHAT_ID_HERE') {
+      // Check if Telegram is configured (env variables are set)
+      if (!telegramConfig.botToken || !telegramConfig.chatId) {
         // Demo mode - just simulate success
         await new Promise(resolve => setTimeout(resolve, 1000));
         setStatus({
           type: 'success',
-          message: 'Message sent successfully! (Demo mode - configure Telegram to receive messages)',
+          message: 'Message sent successfully! (Demo mode - configure Telegram env variables to receive messages)',
         });
       } else {
         const success = await sendToTelegram(formData);
