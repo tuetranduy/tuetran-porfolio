@@ -49,7 +49,7 @@ export const experiences = [
 export const education = [
   {
     degree: "Bachelor's Degree in Information Technology",
-    school: "FPT University",
+    school: "Duy Tue University - International School",
     period: "2012 - 2016",
     description: "Specialized in Software Engineering"
   }

@@ -90,14 +90,14 @@ ${data.message}
     {
       icon: Mail,
       title: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      value: 'tue1996@example.com',
+      link: 'mailto:tue1996@example.com',
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+84 xxx xxx xxx',
-      link: 'tel:+84xxxxxxxxx',
+      value: '+84 966 197 678',
+      link: 'tel:+84966197678',
     },
     {
       icon: MapPin,
