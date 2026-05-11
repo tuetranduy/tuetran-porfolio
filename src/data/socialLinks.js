@@ -1,22 +1,22 @@
-import { Link2, Code2, Send, Mail } from 'lucide-react';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa6';
 
 export const socialLinks = [
   {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/tuetranduy/",
-    icon: Link2,
+    icon: FaLinkedin,
     color: "#0A66C2"
   },
   {
     name: "GitHub",
     url: "https://github.com/tuetranduy",
-    icon: Code2,
+    icon: FaGithub,
     color: "#333"
   },
   {
     name: "Email",
     url: "mailto:tue1996@example.com",
-    icon: Mail,
+    icon: FaEnvelope,
     color: "#EA4335"
   }
 ];

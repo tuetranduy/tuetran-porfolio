@@ -138,11 +138,11 @@ ${data.message}
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 const content = (
-                  <div className="flex items-center gap-5 p-5 bg-slate-900 border border-slate-800 rounded-xl hover:border-cyan-500/50 transition-colors">
+                  <div className="flex items-center gap-5 p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-cyan-500/50 transition-colors">
                     <div className="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Icon className="text-cyan-400" size={26} />
                     </div>
