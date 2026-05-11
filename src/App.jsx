@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import Preloader from './components/common/Preloader';
@@ -42,6 +43,9 @@ function App() {
         </main>
         <Footer />
       </div>
+      
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </>
   );
 }
