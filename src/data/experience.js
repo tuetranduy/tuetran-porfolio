@@ -2,55 +2,55 @@ export const experiences = [
   {
     id: 1,
     title: "Senior Automation QA Engineer",
-    company: "Your Current Company",
+    company: "NashTech",
     location: "Vietnam",
-    period: "2022 - Present",
+    period: "Sep 2021 - Present",
     description: [
-      "Lead automation testing initiatives and mentor junior QA engineers",
-      "Design and implement scalable test automation frameworks using Selenium, Playwright, and Cypress",
-      "Establish CI/CD pipelines with GitLab CI and GitHub Actions for continuous testing",
-      "Conduct performance testing using JMeter and identify bottlenecks",
-      "Collaborate with development teams to ensure quality standards are met"
+      "Built and maintained automated acceptance test framework from scratch for UK's largest personal lines broker (Alt project)",
+      "Led migration from SpecFlow to ReqnRoll framework with Azure DevOps CI/CD integration",
+      "Single-handedly developed entire automated acceptance test framework with XRay Jira integration (GPxx project)",
+      "Developed and maintained automation frameworks for microservice projects using NUnit and ActiveMQ (TxA project)",
+      "Investigate pipeline issues and provide monitoring solutions for continuous integration"
     ],
-    technologies: ["Playwright", "Cypress", "GitHub Actions", "JMeter", "Docker"]
+    technologies: ["C#", "SpecFlow", "ReqnRoll", "Selenium", "Azure DevOps", "NUnit", "ActiveMQ"]
   },
   {
     id: 2,
-    title: "Automation QA Engineer",
-    company: "Previous Company",
+    title: "Senior QA Engineer",
+    company: "EVIZI",
     location: "Vietnam",
-    period: "2019 - 2022",
+    period: "Jun 2020 - Aug 2021",
     description: [
-      "Developed end-to-end test automation solutions for web and mobile applications",
-      "Created BDD test frameworks using Cucumber and SpecFlow",
-      "Implemented API testing strategies with REST Assured and Postman",
-      "Reduced regression testing time by 70% through automation",
-      "Integrated automated tests into Jenkins CI/CD pipelines"
+      "Helped migrate client's system from legacy to AWS cloud infrastructure",
+      "Developed automation framework and integrated with Jenkins CI/CD pipeline",
+      "Designed and executed load testing using JMeter to identify bottlenecks",
+      "Wrote automation test scripts and maintained test suites for rail industry project",
+      "Collaborated with cross-functional teams in Agile/Scrum environment"
     ],
-    technologies: ["Selenium", "Appium", "Cucumber", "Jenkins", "TestNG"]
+    technologies: ["Java", "TestNG", "Cucumber", "Selenium", "Jenkins", "AWS", "JMeter"]
   },
   {
     id: 3,
     title: "QA Engineer",
-    company: "First Company",
+    company: "FPT Software",
     location: "Vietnam",
-    period: "2017 - 2019",
+    period: "Sep 2016 - May 2020",
     description: [
-      "Performed manual and automated testing for enterprise applications",
-      "Developed test plans, test cases, and test scripts",
-      "Participated in Agile/Scrum ceremonies and sprint planning",
-      "Identified, documented, and tracked bugs using JIRA",
-      "Collaborated with developers to resolve defects efficiently"
+      "Led and controlled testing activities including manual and automation testing",
+      "Designed and executed test plans, test cases, and test scripts for enterprise applications",
+      "Performed performance testing using JMeter and Visual Studio Load Test",
+      "Conducted security testing and penetration testing using Burp Suite and ZAP OWASP",
+      "Awarded FPT Platinum Club Member (2018), Best Performer of Business Unit (2017), Best Youth Union Leader (2018)"
     ],
-    technologies: ["Selenium", "Java", "SQL Server", "JIRA", "Git"]
+    technologies: ["Selenium", "Java", "JMeter", "Burp Suite", "SQL Server", "TFS"]
   }
 ];
 
 export const education = [
   {
     degree: "Bachelor's Degree in Information Technology",
-    school: "Your University",
-    period: "2013 - 2017",
+    school: "FPT University",
+    period: "2012 - 2016",
     description: "Specialized in Software Engineering"
   }
 ];

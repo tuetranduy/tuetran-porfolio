@@ -1,8 +1,114 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, GitBranch, ChevronRight } from 'lucide-react';
+import { ExternalLink, GitBranch, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
 import { projects, projectCategories } from '../../data/projects';
+
+const ProjectCard = ({ project, hoveredProject, setHoveredProject }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      className="group relative bg-slate-900 border border-slate-800 rounded-xl overflow-hidden card-hover"
+      onMouseEnter={() => setHoveredProject(project.id)}
+      onMouseLeave={() => setHoveredProject(null)}
+    >
+      {/* Project Image Placeholder */}
+      <div className="h-48 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+        <div className="text-6xl opacity-20">🧪</div>
+      </div>
+
+      {/* Overlay on hover */}
+      <AnimatePresence>
+        {hoveredProject === project.id && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute top-0 left-0 right-0 h-48 bg-cyan-500/20 flex items-center justify-center gap-4"
+          >
+            <motion.a
+              href={project.github}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-cyan-500 transition-colors"
+            >
+              <GitBranch size={20} />
+            </motion.a>
+            <motion.a
+              href={project.demo}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-cyan-500 transition-colors"
+            >
+              <ExternalLink size={20} />
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Content */}
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="px-2 py-1 bg-cyan-500/10 text-cyan-400 text-xs rounded">
+            {project.category}
+          </span>
+        </div>
+        
+        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+          {project.title}
+        </h3>
+        
+        {/* Expandable Description */}
+        <div className="mb-4">
+          <p className={`text-slate-400 text-sm ${!expanded ? 'line-clamp-2' : ''}`}>
+            {project.description}
+          </p>
+          {project.description.length > 100 && (
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="text-cyan-400 text-xs mt-1 flex items-center hover:text-cyan-300 transition-colors"
+            >
+              {expanded ? (
+                <>Show less <ChevronUp size={14} className="ml-1" /></>
+              ) : (
+                <>Read more <ChevronDown size={14} className="ml-1" /></>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Highlights */}
+        <ul className="space-y-1 mb-4">
+          {project.highlights.slice(0, 2).map((highlight, i) => (
+            <li key={i} className="text-slate-500 text-xs flex items-center">
+              <ChevronRight size={12} className="text-cyan-500 mr-1" />
+              {highlight}
+            </li>
+          ))}
+        </ul>
+
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="px-2 py-1 bg-slate-800 text-slate-400 text-xs rounded"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -52,91 +158,12 @@ const Projects = () => {
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <motion.div
+              <ProjectCard
                 key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="group relative bg-slate-900 border border-slate-800 rounded-xl overflow-hidden card-hover"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-              >
-                {/* Project Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-                  <div className="text-6xl opacity-20">🧪</div>
-                </div>
-
-                {/* Overlay on hover */}
-                <AnimatePresence>
-                  {hoveredProject === project.id && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute top-0 left-0 right-0 h-48 bg-cyan-500/20 flex items-center justify-center gap-4"
-                    >
-                      <motion.a
-                        href={project.github}
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-cyan-500 transition-colors"
-                      >
-                        <GitBranch size={20} />
-                      </motion.a>
-                      <motion.a
-                        href={project.demo}
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.1 }}
-                        className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-cyan-500 transition-colors"
-                      >
-                        <ExternalLink size={20} />
-                      </motion.a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="px-2 py-1 bg-cyan-500/10 text-cyan-400 text-xs rounded">
-                      {project.category}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-slate-400 text-sm mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  {/* Highlights */}
-                  <ul className="space-y-1 mb-4">
-                    {project.highlights.slice(0, 2).map((highlight, i) => (
-                      <li key={i} className="text-slate-500 text-xs flex items-center">
-                        <ChevronRight size={12} className="text-cyan-500 mr-1" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-slate-800 text-slate-400 text-xs rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+                project={project}
+                hoveredProject={hoveredProject}
+                setHoveredProject={setHoveredProject}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
