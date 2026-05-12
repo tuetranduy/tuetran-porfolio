@@ -87,8 +87,8 @@ ${data.message}
     {
       icon: Mail,
       title: 'Email',
-      value: 'tue1996@example.com',
-      link: 'mailto:tue1996@example.com',
+      value: 'tue1996@gmail.com',
+      link: 'mailto:tue1996@gmail.com',
     },
     {
       icon: Phone,
